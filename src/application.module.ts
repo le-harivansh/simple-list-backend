@@ -4,4 +4,4 @@ import { ListModule } from './list/list.module';
 @Module({
   imports: [ListModule],
 })
-export class AppModule {}
+export class ApplicationModule {}
