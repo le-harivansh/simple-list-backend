@@ -1,6 +1,7 @@
 # NestJs
 
 dist/
+database/database.sqlite
 
 .env
 
@@ -14,4 +15,3 @@ dist/
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
-
