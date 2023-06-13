@@ -5,9 +5,8 @@ import applicationConfig from './application.config';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      load: [applicationConfig],
-    }),
+    ConfigModule.forRoot(),
+    ConfigModule.forFeature(applicationConfig),
     ListModule,
   ],
 })
