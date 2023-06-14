@@ -1,7 +1,7 @@
 # NestJs
 
 dist/
-database/database.sqlite
+database.sqlite
 
 .env
 

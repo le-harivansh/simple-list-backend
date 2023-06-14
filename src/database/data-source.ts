@@ -2,9 +2,9 @@ import { DataSource, DataSourceOptions } from "typeorm";
 
 export const dataSourceOptions: DataSourceOptions = {
     type: 'sqlite',
-    database: 'database/database.sqlite',
+    database: 'database.sqlite',
     entities: [
-        "dist/src/**/*.entity.js"
+        "dist/**/*.entity.js"
     ],
     migrations: [
         "dist/database/migrations/*.js",
