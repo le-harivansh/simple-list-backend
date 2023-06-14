@@ -4,7 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 import applicationConfig from './application.config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import path from 'path';
-import { dataSourceOptions } from 'database/datasource';
+import { dataSourceOptions } from 'src/datasource';
 
 @Module({
   imports: [
