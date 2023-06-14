@@ -1,10 +1,15 @@
+/**
+ * The configuration in this file is used for the migration of the database,
+ * and for the default connection of the database to the app.
+ */
+
 import { DataSource, DataSourceOptions } from "typeorm";
 
 export const dataSourceOptions: DataSourceOptions = {
     type: 'sqlite',
     database: 'database.sqlite',
     entities: [
-        "**/*.entity.js",
+        "dist/**/*.entity.js",
     ],
     migrations: [
         "dist/database/migrations/*.js",
