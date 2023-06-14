@@ -10,15 +10,33 @@ export class ItemService {
         private itemsRepository: Repository<Item>
     ) {}
 
+    findAll() {
+        return this.itemsRepository.find();
+    }
+
+    find(id: number) {
+        return this.itemsRepository.findOneByOrFail({ id })
+    }
+
     create(title: string) {
         const item = new Item();
 
         item.title = title;
 
-        this.itemsRepository.save(item);
+        return this.itemsRepository.save(item);
     }
 
-    findAll() {
-        return this.itemsRepository.find();
+    async update(id: number, title: string) {
+        const item = await this.itemsRepository.findOneByOrFail({ id });
+
+        item.title = title;
+
+        return this.itemsRepository.save(item);
+    }
+
+    async delete(id: number) {
+        const item = await this.itemsRepository.findOneByOrFail({ id });
+
+        return !!(await this.itemsRepository.delete(item.id)).affected
     }
 }
