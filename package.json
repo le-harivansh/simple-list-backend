@@ -20,7 +20,8 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "migration:generate": "yarn run typeorm-ts-node-commonjs migration:generate --dataSource ./src/database/data-source.ts",
     "migration:run": "yarn run typeorm-ts-node-commonjs migration:run --dataSource ./src/database/data-source.ts",
-    "db:seed": "yarn run typeorm-seeding seed"
+    "seeder:run": "yarn run ts-node ./node_modules/typeorm-seeding/dist/cli.js seed --configName ./src/database/seeder-ormconfig.ts",
+    "seeder:config": "yarn run ts-node ./node_modules/typeorm-seeding/dist/cli.js config --configName ./src/database/seeder-ormconfig.ts"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
