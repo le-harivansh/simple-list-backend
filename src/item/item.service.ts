@@ -35,8 +35,6 @@ export class ItemService {
     }
 
     async delete(id: number) {
-        const item = await this.itemsRepository.findOneByOrFail({ id });
-
-        return !!(await this.itemsRepository.delete(item.id)).affected
+        return !!(await this.itemsRepository.delete(id)).affected
     }
 }
