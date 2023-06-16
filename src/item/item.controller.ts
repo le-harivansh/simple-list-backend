@@ -19,17 +19,16 @@ export class ItemController {
         return this.itemService.find(id)
     }
 
-    @Post('item/create')
+    @Post('item')
     @UsePipes(ValidationPipe)
     public create(@Body() { title }: CreateItemDto) {
         return this.itemService.create(title);
     }
 
-    @Put('item/:id')
+    @Put('item')
     @UsePipes(ValidationPipe)
     public update(
-        @Param('id') id: number,
-        @Body() { title }: UpdateItemDto,
+        @Body() { id, title }: UpdateItemDto,
     ) {
         return this.itemService.update(id, title);
     }

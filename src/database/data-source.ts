@@ -4,16 +4,19 @@
  */
 
 import { DataSource, DataSourceOptions } from "typeorm";
+import { Item } from "../item/item.entity";
 
 export const dataSourceOptions: DataSourceOptions = {
     type: 'sqlite',
-    database: 'database.sqlite',
+    database: process.env.NODE_ENV === 'test' ? 'test-database.sqlite' : 'database.sqlite',
     entities: [
-        "dist/**/*.entity.js",
+        // "dist/**/*.entity.js",
+        Item
     ],
     migrations: [
         "dist/database/migrations/*.js",
-    ]
+    ],
+    synchronize: process.env.NODE_ENV === 'test',
 }
 
 const dataSource = new DataSource(dataSourceOptions);
