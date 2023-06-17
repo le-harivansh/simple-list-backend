@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { APPLICATION_DATABASE_NAME, TEST_DATABASE_NAME } from './constants';
 
 @Module({
   imports: [
@@ -7,8 +8,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       type: 'better-sqlite3',
       database:
         process.env.NODE_ENV === 'test'
-          ? 'test-database.sqlite'
-          : 'database.sqlite',
+          ? TEST_DATABASE_NAME
+          : APPLICATION_DATABASE_NAME,
       autoLoadEntities: true,
       logging: true,
       synchronize: process.env.NODE_ENV === 'test',
