@@ -8,7 +8,11 @@ async function bootstrap() {
 
   const configService = application.get(ConfigService);
 
-  await application.listen(configService.get<ApplicationConfiguration['port']>('application.port')!);
+  await application.listen(
+    configService.getOrThrow<ApplicationConfiguration['port']>(
+      'application.port',
+    ),
+  );
 }
 
 bootstrap();

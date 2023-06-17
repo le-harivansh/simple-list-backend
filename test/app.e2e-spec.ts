@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { HttpCode, HttpStatus, INestApplication } from '@nestjs/common';
+import { HttpStatus, INestApplication } from '@nestjs/common';
 import request from 'supertest';
 import { ApplicationModule } from '../src/application.module';
 import { Repository } from 'typeorm';
@@ -9,11 +9,11 @@ import { unlinkSync } from 'fs';
 
 describe('ItemController (e2e)', () => {
   const items: Item[] = [
-    { id: 1, title: "One" },
-    { id: 2, title: "Two" },
-    { id: 3, title: "Three" },
-    { id: 4, title: "Four" },
-    { id: 5, title: "Five" },
+    { id: 1, title: 'One' },
+    { id: 2, title: 'Two' },
+    { id: 3, title: 'Three' },
+    { id: 4, title: 'Four' },
+    { id: 5, title: 'Five' },
   ];
 
   let application: INestApplication;
@@ -27,7 +27,7 @@ describe('ItemController (e2e)', () => {
     application = moduleFixture.createNestApplication();
     await application.init();
 
-    itemsRepository = moduleFixture.get(getRepositoryToken(Item))
+    itemsRepository = moduleFixture.get(getRepositoryToken(Item));
 
     for (const item of items) {
       await itemsRepository.insert(item);
@@ -35,12 +35,12 @@ describe('ItemController (e2e)', () => {
   });
 
   afterEach(async () => {
-    await itemsRepository.clear()
-  })
+    await itemsRepository.clear();
+  });
 
   afterAll(() => {
-    unlinkSync(`${__dirname}/../test-database.sqlite`)
-  })
+    unlinkSync(`${__dirname}/../test-database.sqlite`);
+  });
 
   test('/items (GET)', () => {
     return request(application.getHttpServer())
@@ -50,13 +50,17 @@ describe('ItemController (e2e)', () => {
   });
 
   test('/item/:id (GET)', () => {
-    const itemToRetrieve = items.find(({ id }) => id === 4)!;
+    const itemToRetrieve = items.find(({ id }) => id === 4);
+
+    if (!itemToRetrieve) {
+      throw 'Did not retrieve the expected `itemToRetrieve`.';
+    }
 
     return request(application.getHttpServer())
       .get(`/item/${itemToRetrieve.id}`)
       .expect(HttpStatus.OK)
       .expect(itemToRetrieve);
-  })
+  });
 
   test('/item (POST)', () => {
     const newItemTitle = 'The new item';
@@ -67,22 +71,22 @@ describe('ItemController (e2e)', () => {
       .expect(HttpStatus.CREATED)
       .expect({
         id: 6,
-        title: newItemTitle
-      })
-  })
+        title: newItemTitle,
+      });
+  });
 
   test('/item/:id (PUT)', () => {
     const itemToUpdateData: Item = {
       id: 2,
-      title: 'The new two'
-    }
+      title: 'The new two',
+    };
 
     return request(application.getHttpServer())
       .put('/item')
       .send(itemToUpdateData)
       .expect(HttpStatus.OK)
-      .expect(itemToUpdateData)
-  })
+      .expect(itemToUpdateData);
+  });
 
   test('/item/:id (DELETE)', () => {
     const idOfItemToDelete = 2;
@@ -91,7 +95,7 @@ describe('ItemController (e2e)', () => {
       .delete(`/item/${idOfItemToDelete}`)
       .expect(HttpStatus.OK)
       .expect({
-        success: true
-      })
-  })
+        success: true,
+      });
+  });
 });
