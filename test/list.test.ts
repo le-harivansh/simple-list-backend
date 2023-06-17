@@ -6,7 +6,7 @@ import { Repository } from 'typeorm';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Item } from '../src/item/item.entity';
 import { unlinkSync } from 'fs';
-import { TEST_DATABASE_NAME } from '../src/database/constants';
+import { TEST_DATABASE } from '../src/database/constants';
 
 describe('ItemController (e2e)', () => {
   const items: Item[] = [
@@ -40,7 +40,7 @@ describe('ItemController (e2e)', () => {
   });
 
   afterAll(() => {
-    unlinkSync(`${__dirname}/../${TEST_DATABASE_NAME}`);
+    unlinkSync(`${__dirname}/../${TEST_DATABASE}`);
   });
 
   test('/items (GET)', () => {
