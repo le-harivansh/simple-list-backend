@@ -1,8 +1,8 @@
 {
   "name": "simple-list",
-  "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "version": "1.0.0",
+  "description": "A simple server that CRUDs list items.",
+  "author": "Harivansh",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
@@ -20,8 +20,7 @@
     "test:e2e": "jest --config ./test/jest.config.ts",
     "migration:generate": "yarn run typeorm-ts-node-commonjs migration:generate --dataSource ./src/database/migration-data-source.ts",
     "migration:run": "yarn run typeorm-ts-node-commonjs migration:run --dataSource ./src/database/migration-data-source.ts",
-    "seeder:run": "yarn run ts-node ./node_modules/typeorm-seeding/dist/cli.js seed --configName ./src/database/seeder-ormconfig.ts",
-    "seeder:config": "yarn run ts-node ./node_modules/typeorm-seeding/dist/cli.js config --configName ./src/database/seeder-ormconfig.ts"
+    "seeder:run": "yarn run ts-node ./node_modules/typeorm-seeding/dist/cli.js seed --configName ./src/database/seeder-ormconfig.ts"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
