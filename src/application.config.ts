@@ -1,24 +1,14 @@
-import { registerAs } from '@nestjs/config';
+import { ConfigFactory } from '@nestjs/config';
 import Joi from 'joi';
+import registerConfiguration from './lib/register-configuration';
 
-export type ApplicationConfiguration = {
+export interface ApplicationConfiguration extends ConfigFactory {
   port: number;
 };
 
-export default registerAs<ApplicationConfiguration>('application', () => {
-  const schema = Joi.object({
-    port: Joi.number().default(3000),
-  });
-
-  const { value: validatedData, error: validationError } = schema.validate({
-    port: process.env.APPLICATION_PORT,
-  });
-
-  if (validationError) {
-    throw validationError;
-  }
-
-  return {
-    port: validatedData.port,
-  };
+export default registerConfiguration<ApplicationConfiguration>('application', {
+  port: {
+    env: 'APPLICATION_PORT',
+    rules: Joi.number().port().default(80),
+  },
 });
