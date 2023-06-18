@@ -8,11 +8,20 @@ async function bootstrap() {
 
   const configService = application.get(ConfigService);
 
-  await application.listen(
+  application.enableCors({
+    origin: [
+      configService.getOrThrow<
+        ApplicationConfiguration['cors']['origin']['web']
+      >('application.cors.origin.web'),
+    ],
+  });
+
+  const port =
     configService.getOrThrow<ApplicationConfiguration['port']>(
       'application.port',
-    ),
-  );
+    );
+
+  await application.listen(port);
 }
 
 bootstrap();
