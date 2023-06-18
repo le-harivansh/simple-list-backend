@@ -7,9 +7,7 @@ import { APPLICATION_DATABASE, TEST_DATABASE } from './constants';
     TypeOrmModule.forRoot({
       type: 'better-sqlite3',
       database:
-        process.env.NODE_ENV === 'test'
-          ? TEST_DATABASE
-          : APPLICATION_DATABASE,
+        process.env.NODE_ENV === 'test' ? TEST_DATABASE : APPLICATION_DATABASE,
       autoLoadEntities: true,
       logging: true,
       synchronize: process.env.NODE_ENV === 'test',
